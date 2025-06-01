@@ -54,8 +54,10 @@ func (d *Data) Param(id string) string {
 
 // sends and logs a generic '500 internal server error'
 func (d *Data) Error(err error) {
-	Logger.Println("internal server error:", err)
 	d.Status(http.StatusInternalServerError)
+	str := fmt.Sprintf("500 internal server error: %s", err)
+	Logger.Println(str)
+	d.Write(str)
 }
 
 // get json request data
